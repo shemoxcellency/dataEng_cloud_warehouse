@@ -1,0 +1,37 @@
+{
+    "data-warehouse-dag" : {
+        "description": "Convert CSV files to PARQUET format, make external tables as staging phase, and create data warehouse in Google BigQuery",
+        "project_id" : "final-project-de",
+        "dataproc" : {
+            "region" : "us-west1",
+            "cluster_name" : "cluster-final-project",
+            "zone" : "us-west1-a",
+            "num_workers" : 0,
+            "master_machine" : "n1-standard-4",
+            "worker_machine" : "n1-standard-2",
+            "master_disk_size" : 500,
+            "worker_disk_size" : 500
+        },
+        "bq" : {
+            "bq_conn_id" : "bigquery_default",
+            "staging_dataset": "final_project_staging",
+            "dwh_dataset" : "final_project_dwh"
+        },
+        "gcs" : {
+            "gcs_conn_id" : "google_cloud_storage_default",
+            "main_bucket" : "us-central1-final-project-d-b229f7be-bucket",
+            "source_bucket" : "final_project_de",
+            "pyspark_file" : "gs://us-central1-final-project-d-b229f7be-bucket/src/convert_to_parquet.py",
+            "files": [
+                "uscountry",
+                "immigration_data_sample",
+                "usport",
+                "usstate",
+                "globallandtemperaturesbycity",
+                "us_cities_demographics",
+                "airport_codes_csv",
+                "orders"
+            ]
+        }
+    }
+}
